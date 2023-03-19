@@ -1,26 +1,32 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <center>
+      <h1>Counter: {{ counter }}</h1> />
+      <button @click="increment">Increment</button>
+      <button @click="reset">Reset</button>
+    </center>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+  computed:{
+    counter(){
+      return this.$store.getters.counter
+    },
+
+    methods: {
+      increment(){
+        return this.$store.dispatch('increment')
+      },
+
+      reset(){
+        return this.$store.dispatch('reset')
+      }
+  },
+    
+  }
+  
+  }
+</script>
