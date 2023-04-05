@@ -1,35 +1,50 @@
 import { createStore } from "vuex";
 
-const store = createStore({
-    state: {
-        count : 0
+const useStore = createStore({
+  state() {
+    return {
+      counter: 0,
+    };
+  },
+  getters: {
+    getCounter(state) {
+      return state.counter;
     },
-    getters:{
-        counter(state){
-            return state.count;
-             }
-
-    },
-    actions:{
-        increment({commit}){
-            commit('increment')
-        },
-
-        reset({commit}){
-            commit('reset')
-        }
+  },
+  mutations: {
+    increment(state, payload) {
+      state.counter = state.counter + payload;
     },
 
-    mutations:{
-        increment(state){
-            state.count++
-        },
+    decrement(state, payload) {
+      state.counter = state.counter - payload;
+    },
 
-        reset(state){
-            state.count=0;
-        }
+    reset(state, payload) {
+      state.counter = state.counter * payload;
+    },
 
-    }
-})
+    setValue(state, payload) {
+      state.counter = payload;
+    },
+  },
+  actions: {
+    increment(context, payload) {
+      context.commit("increment", payload);
+    },
 
-export default store;
+    decrement(context, payload) {
+      context.commit("decrement", payload);
+    },
+
+    reset(context, payload) {
+      context.commit("reset", payload);
+    },
+
+    setValue(context, payload) {
+      context.commit("setValue", payload);
+    },
+  },
+});
+
+export default useStore;
